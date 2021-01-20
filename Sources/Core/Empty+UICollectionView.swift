@@ -26,6 +26,7 @@ extension UICollectionView {
     
     @objc override var isEmpty: Bool {
         let count = dataSource?.numberOfSections?(in: self) ?? numberOfSections
+        guard count > 0 else { return true }
         return (0..<count).first(where: { self.numberOfItems(inSection: $0) > 0 }) == nil
     }
     

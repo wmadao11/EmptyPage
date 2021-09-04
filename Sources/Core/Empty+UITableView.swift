@@ -32,28 +32,37 @@ extension UITableView {
     
     @objc func emptyPage_insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         self.emptyPage_insertRows(at: indexPaths, with: animation)
-        setEmptyView(isEmpty)
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
     @objc func emptyPage_deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         self.emptyPage_deleteRows(at: indexPaths, with: animation)
-        setEmptyView(isEmpty)
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
     @objc func emptyPage_insertSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         self.emptyPage_insertSections(sections, with: animation)
-        setEmptyView(isEmpty)
-        
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
     @objc func emptyPage_deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         self.emptyPage_deleteSections(sections, with: animation)
-        setEmptyView(isEmpty)
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
     @objc func emptyPage_reloadData() {
         self.emptyPage_reloadData()
-        setEmptyView(isEmpty)
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
 }

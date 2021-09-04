@@ -46,11 +46,6 @@ extension UIScrollView {
         set { objc_setAssociatedObject(self, EmptyDataKey.isSetedFirstLoadingView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
     
-    var oldIsScrollEnabled: Bool {
-        get { return objc_getAssociatedObject(self, EmptyDataKey.oldEmptyView) as? Bool ?? self.isScrollEnabled }
-        set { objc_setAssociatedObject(self, EmptyDataKey.oldEmptyView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
-    }
-    
     // 私有属性 (多次赋值emptyView时,防止多个emptyView同时出现)
     weak var oldEmptyView: UIView? {
         get { return objc_getAssociatedObject(self, EmptyDataKey.oldEmptyView) as? UIView }
@@ -134,14 +129,10 @@ extension UIScrollView {
         self.oldEmptyView?.removeFromSuperview()
         
         guard isEmpty else {
-            isScrollEnabled = oldIsScrollEnabled
             firstLoadingView?.removeFromSuperview()
             emptyView?.removeFromSuperview()
             return
         }
-        
-        oldIsScrollEnabled = isScrollEnabled
-        isScrollEnabled = isEmpty
         
         var emptyView: UIView?
         

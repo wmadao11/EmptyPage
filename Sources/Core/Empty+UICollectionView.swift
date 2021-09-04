@@ -32,27 +32,37 @@ extension UICollectionView {
     
     @objc func emptyPage_insertItems(at indexPaths: [IndexPath]) {
         self.emptyPage_insertItems(at: indexPaths)
-        setEmptyView(isEmpty)
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
     @objc func emptyPage_deleteItems(at indexPaths: [IndexPath]) {
         self.emptyPage_deleteItems(at: indexPaths)
-        setEmptyView(isEmpty)
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
     @objc func emptyPage_insertSections(_ sections: IndexSet) {
         self.emptyPage_insertSections(sections)
-        setEmptyView(isEmpty)
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
     @objc func emptyPage_deleteSections(_ sections: IndexSet) {
         self.emptyPage_deleteSections(sections)
-        setEmptyView(isEmpty)
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
     @objc func emptyPage_reloadData() {
         self.emptyPage_reloadData()
-        setEmptyView(isEmpty)
+        if isSetedEmptyView && emptyView != nil {
+            setEmptyView(isEmpty)
+        }
     }
     
 }

@@ -28,7 +28,6 @@ public extension EmptyPage where Base: UIScrollView {
     ///
     /// - Parameter clourse: clourse description
     static func setGlobalFirstLoading(_ clourse: ((UIScrollView) -> UIView?)?) {
-        EmptyPageRuntime.swizzingLayout
         EmptyPageRuntime.swizzingTableView
         EmptyPageRuntime.swizzingCollectionView
         EmptyPageConfig.shared.firstLoadingView = clourse
@@ -38,7 +37,6 @@ public extension EmptyPage where Base: UIScrollView {
     ///
     /// - Parameter clourse: clourse description
     static func setGlobalEmpty(_ clourse: ((UIScrollView) -> UIView?)?) {
-        EmptyPageRuntime.swizzingLayout
         EmptyPageRuntime.swizzingTableView
         EmptyPageRuntime.swizzingCollectionView
         EmptyPageConfig.shared.emptyView = clourse

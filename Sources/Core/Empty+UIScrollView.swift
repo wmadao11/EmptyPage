@@ -76,7 +76,6 @@ extension UIScrollView {
             }
             
             if newValue != nil {
-                EmptyPageRuntime.swizzingLayout
                 /// 兼容子类化情况
                 if self.isKind(of: UITableView.self) {
                     EmptyPageRuntime.swizzingTableView
@@ -147,9 +146,15 @@ extension UIScrollView {
         
         guard let view = emptyView else { return }
 
-        view.frame = bounds
         view.removeFromSuperview()
         addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: frameLayoutGuide.topAnchor),
+            view.bottomAnchor.constraint(equalTo: frameLayoutGuide.bottomAnchor),
+            view.leadingAnchor.constraint(equalTo: frameLayoutGuide.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: frameLayoutGuide.trailingAnchor)
+        ])
         
         #if swift(>=4.2)
         sendSubviewToBack(view)
@@ -158,31 +163,4 @@ extension UIScrollView {
         #endif
     }
     
-}
-
-extension UIScrollView {
-
-    private func reSizeEmptyPage(function: String = #function) {
-        if let emptyView = self.ep.firstLoadingView {
-            if emptyView.superview != nil, emptyView.frame != bounds {
-                emptyView.frame = bounds
-            }
-        } else if let emptyView = self.ep.emptyView {
-            if emptyView.superview != nil, emptyView.frame != bounds {
-                emptyView.frame = bounds
-            }
-        }
-    }
-
-    @objc func emptyPage_layoutSubviews() {
-        emptyPage_layoutSubviews()
-        reSizeEmptyPage()
-
-    }
-
-    @objc func emptyPage_layoutIfNeeded() {
-        emptyPage_layoutIfNeeded()
-        reSizeEmptyPage()
-    }
-
 }
